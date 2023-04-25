@@ -12,6 +12,7 @@ import 'package:flutter_food_recipe_ui/ui/home_ui/controller/home_controller.dar
 import 'package:flutter_food_recipe_ui/ui/home_ui/widget/category_chips.dart';
 import 'package:flutter_food_recipe_ui/ui/home_ui/widget/horizotal_list_food_widget.dart';
 import 'package:flutter_food_recipe_ui/ui/home_ui/widget/list_food_recommend_widget.dart';
+import 'package:flutter_food_recipe_ui/ui/home_ui/widget/show_all_btn_widget.dart';
 import 'package:flutter_food_recipe_ui/ui/home_ui/widget/show_category_item_widget.dart';
 import 'package:flutter_food_recipe_ui/ui/home_ui/widget/title_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +26,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late HomePageCubit homePageCubit;
+
+  get _divider => Divider(
+        thickness: Dimens.size16,
+        height: Dimens.size48,
+        color: AppColors.recommendFoodBackgroundTextColor,
+      );
 
   @override
   void initState() {
@@ -52,23 +59,24 @@ class _HomePageState extends State<HomePage> {
             const SafeArea(
               child: TitleWidget(),
             ),
-            buildSearchBar(),
+            const AppSearchBarWidget(),
             Expanded(
               child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: Dimens.size16,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildListFood(),
-                       const ListFoodRecommendWidget(title: "New Recipes",),
-                       const ListFoodRecommendWidget(title: "Food Recommend",),
-                    ],
-                  ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildListFood(),
+                    _divider,
+                    const ListFoodRecommendWidget(
+                      title: "New Recipes",
+                    ),
+                    const SizedBox(height: Dimens.size30),
+                    const ListFoodRecommendWidget(
+                      title: "Food Recommend",
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -88,11 +96,14 @@ class _HomePageState extends State<HomePage> {
           child: BlocBuilder<HomePageCubit, HomeState>(
               builder: (context, homeState) {
             final listData = homeState.listCategory;
-            return CategoryChip(
-              listData: listData,
-              onItemPressed: (index, category) {
-                context.read<HomePageCubit>().selectedCategory(index: index);
-              },
+            return Padding(
+              padding: const EdgeInsets.only(left: Dimens.size16),
+              child: CategoryChip(
+                listData: listData,
+                onItemPressed: (index, category) {
+                  context.read<HomePageCubit>().selectedCategory(index: index);
+                },
+              ),
             );
           }),
         ),
@@ -120,8 +131,18 @@ class _HomePageState extends State<HomePage> {
       ],
     );
   }
+}
 
-  Widget buildSearchBar() {
+class AppSearchBarWidget extends StatelessWidget {
+  final Function(String)? onChanged;
+
+  const AppSearchBarWidget({
+    super.key,
+    this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
         top: Dimens.size30,
@@ -129,6 +150,7 @@ class _HomePageState extends State<HomePage> {
         left: Dimens.size16,
       ),
       child: TextField(
+        onChanged: onChanged,
         onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
         decoration: InputDecoration(
           hintText: 'Search recipe',
@@ -154,13 +176,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-/*Widget _buildItemFood(
-    BuildContext context,
-    int index,
-    List<FoodEntity> listData,
-  ) {
-    final foodData = listData[index];
-    return ShowCategoryItemWidget(foodData: foodData);
-  }*/
 }

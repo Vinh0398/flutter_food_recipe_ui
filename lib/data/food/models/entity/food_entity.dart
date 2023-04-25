@@ -6,13 +6,16 @@ part 'food_entity.g.dart';
 @JsonSerializable()
 class FoodEntity {
   String? title;
+  int? id;
   int? categoryId;
   String? description;
   double? rate;
   String? image;
   FoodMetaEntity? meta;
+
   FoodEntity(
       {this.title,
+      this.id,
       this.categoryId,
       this.description,
       this.rate,

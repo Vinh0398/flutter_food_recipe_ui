@@ -20,4 +20,10 @@ class FoodRemoteDataSource implements FoodDataSource {
     var res = await foodRetrofit.getListFoodFromCategoryId(categoryId!);
     return res.data ?? [];
   }
+
+  @override
+  Future<FoodEntity> getFood({required String foodId}) async{
+    var res = await foodRetrofit.getFoodFromFoodId(foodId);
+    return res.data;
+  }
 }

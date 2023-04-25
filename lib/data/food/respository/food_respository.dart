@@ -5,6 +5,7 @@ abstract class FoodDataSource {
   Future<List<FoodEntity>> getListFood();
   Future<List<FoodEntity>> getListFoodFromCategoryId(
       {required String? categoryId});
+  Future<FoodEntity> getFood({required String foodId});
 }
 
 class FoodRepository implements FoodDataSource {
@@ -25,5 +26,10 @@ class FoodRepository implements FoodDataSource {
   Future<List<FoodEntity>> getListFoodFromCategoryId(
       {required String? categoryId}) {
     return remoteDataSource.getListFoodFromCategoryId(categoryId: categoryId);
+  }
+
+  @override
+  Future<FoodEntity> getFood({required String foodId}) {
+    return remoteDataSource.getFood(foodId: foodId);
   }
 }

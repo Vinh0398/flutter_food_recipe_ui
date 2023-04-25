@@ -57,6 +57,7 @@ class _HorizontalListFoodWidgetState extends State<HorizontalListFoodWidget> {
           ),
           itemCount: min(data.length, 5),
           scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: Dimens.size16),
         );
       },
     );

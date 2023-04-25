@@ -1,3 +1,4 @@
+import 'package:flutter_food_recipe_ui/data/food/models/response/food_by_id_response.dart';
 import 'package:flutter_food_recipe_ui/data/food/models/response/list_food_by_id_response.dart';
 import 'package:flutter_food_recipe_ui/data/food/models/response/list_food_response.dart';
 import 'package:retrofit/http.dart';
@@ -16,4 +17,10 @@ abstract class FoodRetrofit {
   Future<ListFoodByCategoryIdResponse> getListFoodFromCategoryId(
     @Query("categoryId") String categoryId,
   );
+
+  @GET("/food/{id}")
+  Future<FoodByIdResponse> getFoodFromFoodId(
+      @Path("id") String foodId,
+
+      );
 }

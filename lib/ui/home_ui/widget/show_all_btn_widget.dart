@@ -18,7 +18,7 @@ class ShowAllBtnWidget extends StatelessWidget {
         'Show All',
         style: TextStyle(
           fontWeight: FontWeight.w400,
-          fontSize: Dimens.size11,
+          fontSize: Dimens.size16,
           color: AppColors.functionColor,
         ),
       ),

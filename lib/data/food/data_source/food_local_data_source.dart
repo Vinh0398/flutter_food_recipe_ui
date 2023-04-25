@@ -13,4 +13,10 @@ class FoodLocalDataSource implements FoodDataSource {
     // TODO: implement getListFoodFromCategoryId
     throw UnimplementedError();
   }
+
+  @override
+  Future<FoodEntity> getFood({required String foodId}) {
+    // TODO: implement getFood
+    throw UnimplementedError();
+  }
 }
