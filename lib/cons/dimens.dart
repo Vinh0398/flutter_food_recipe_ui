@@ -1,4 +1,8 @@
 class Dimens {
+  static double size48 = 48.0;
+
+  static const double size4 = 4.0;
+
   Dimens._();
   static const double size20 = 20.0;
   static const double size5 = 5.0;
@@ -34,4 +38,5 @@ class Dimens {
   static const double size156 = 156.0;
   static const double size13 = 13.0;
   static const double size90 = 90.0;
+  static const double size315 = 315.0;
 }

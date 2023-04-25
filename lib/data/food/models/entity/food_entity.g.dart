@@ -8,6 +8,7 @@ part of 'food_entity.dart';
 
 FoodEntity _$FoodEntityFromJson(Map<String, dynamic> json) => FoodEntity(
       title: json['title'] as String?,
+      id: json['id'] as int?,
       categoryId: json['categoryId'] as int?,
       description: json['description'] as String?,
       rate: (json['rate'] as num?)?.toDouble(),
@@ -20,6 +21,7 @@ FoodEntity _$FoodEntityFromJson(Map<String, dynamic> json) => FoodEntity(
 Map<String, dynamic> _$FoodEntityToJson(FoodEntity instance) =>
     <String, dynamic>{
       'title': instance.title,
+      'id': instance.id,
       'categoryId': instance.categoryId,
       'description': instance.description,
       'rate': instance.rate,

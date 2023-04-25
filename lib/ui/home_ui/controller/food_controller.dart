@@ -22,4 +22,14 @@ class FoodListCubit extends Cubit<List<FoodEntity>> {
     final result = await getListFoodUseCase.invoke(param: categoryId);
     emit(result);
   }
+
+  Future<void> fetchRecommendFoods() async {
+    final result = await getAllFoodUseCase.invoke(param: null);
+    emit(result);
+  }
+
+  Future<void> fetchNewRecipeFoods() async {
+    final result = await getAllFoodUseCase.invoke(param: null);
+    emit(result);
+  }
 }
